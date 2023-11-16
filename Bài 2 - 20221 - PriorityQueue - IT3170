@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define FOR(i,l,r) for ( int i = l ; i <= r ; i++ )
+#define FOD(i,l,r) for ( int i = l ; i >= r ; i-- )
+    int main(){
+        std::priority_queue<int>pq;
+        int n,x;
+        std::cin>>n;
+        for ( int i = 1 ; i <= n ; i++ ){
+            std::cin>>x;
+            pq.push(x);
+        }
+        std::string s;
+        while (std::cin>>s){
+            if ( s == "insert" ){
+                std::cin>>x;
+                pq.push(x);
+            }
+            if ( s == "delete-max" ){
+                int u = pq.top();
+                std::cout<<u<<std::endl;
+                pq.pop();
+            }
+            if ( s == "*" ){
+                break;
+            }
+        }
+        return 0;
+    }
+
+    
