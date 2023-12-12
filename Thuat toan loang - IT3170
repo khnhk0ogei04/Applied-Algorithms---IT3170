@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+const int MAXN = 1e3 + 1;
+// using namespace std;
+    int n,m,A[MAXN][MAXN],dem = 0;
+    std::vector<int>v;
+    int dx[] = {-1,0,0,1};
+    int dy[] = {0,-1,1,0};
+     void loang( int i, int j ){
+         dem++;
+         A[i][j] = 0;
+         for ( int k = 0 ; k <= 3 ; k++ ){
+             int i1 = i + dy[k], j1 = j + dx[k];
+             if ( i1 >= 1 && i1 <= n && j1 >= 1 && j1 <= m && A[i1][j1] == 1)
+            loang(i1,j1);
+        }
+    }
+     int main(){
+         std::cin>>n>>m;
+         for ( int i = 1 ; i <= n ; i++ ){
+             for ( int j = 1 ; j <= m ; j++ ){
+                 std::cin>>A[i][j];
+             }
+         }
+         int cnt = 0;
+         
+         for ( int i = 1 ; i <= n ; i++ ){
+             for ( int j = 1 ; j <= m ; j++ ){
+                 if (A[i][j]) {
+                     cnt++;
+                     loang(i,j);
+                     v.push_back(dem);
+                     dem = 0;
+                }
+             }
+         }
+         std::cout<<cnt<<std::endl;
+         std::sort(v.begin(),v.end());
+        for ( auto x: v ) std::cout<<x<<" ";
+         return 0;
+     }
