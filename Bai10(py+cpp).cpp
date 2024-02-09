@@ -42,3 +42,37 @@ typedef std::pair<int,int> pii;
             solve();
             return 0;
         }
+
+def check(c):
+    if c == 'u' or c == 'e' or c == 'o' or c == 'a' or c == 'i':
+        return True
+    else:
+        return False
+
+def solve():
+    s = input()
+    n = len(s)
+    s = " " + s
+    f = [[0] * (n + 1) for _ in range(n + 1)]
+    g = [[0] * (n + 1) for _ in range(n + 1)]
+
+    for i in range(1, n):
+        if check(s[i]) and check(s[i + 1]):
+            f[i][i + 1] = 2
+        elif not check(s[i]) and not check(s[i + 1]):
+            g[i][i + 1] = 2
+
+    for length in range(2, n):
+        for i in range(1, n - length + 1):
+            j = i + length
+            f[i][j] = max(f[i + 1][j], f[i][j - 1])
+            g[i][j] = max(g[i + 1][j], g[i][j - 1])
+            if check(s[i]) and check(s[j]):
+                f[i][j] = max(f[i][j], g[i + 1][j - 1] + 2)
+            elif not check(s[i]) and not check(s[j]):
+                g[i][j] = max(g[i][j], f[i + 1][j - 1] + 2)
+
+    print(n - max(f[1][n], g[1][n]))
+
+if __name__ == "__main__":
+    solve()
