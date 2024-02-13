@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define MAXN 100005
+using namespace std;
+    pair<int,int>p[MAXN];
+    int n,ans = 1;
+    bool cmp( std::pair<int,int>x , std::pair<int,int>y ){
+        return x.second < y.second;
+    }
+    void solve(){
+        std::cin>>n;
+        for ( int i = 1 ; i <= n ; i++ ){
+            int x,y;
+            std::cin>>x>>y;
+            p[i].first = x; p[i].second = y;
+        }
+        int tmp = p[1].second;
+        for ( int i = 2 ; i <= n ; i++ ){
+            if ( p[i].first >= tmp ){
+                ans++;
+                tmp = p[i].second;
+            }
+        }
+        std::cout<<ans;
+    }
+    int main(){
+        solve();
+        return 0;
+    }
