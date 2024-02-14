@@ -46,14 +46,14 @@ typedef struct node{
         }
         else {
             if (t->left == NULL){
-                node *temp = t->right;
-                delete(t);
-                return temp;
+                node *temp = t;
+                t = t->right;
+                delete(temp);
             }
-            if ( t->right == NULL ){
-                node *temp = t->left;
-                delete(t);
-                return temp;
+            else if ( t->right == NULL ){
+                node *temp = t;
+                t = t->left;
+                delete(temp);
             }
             else{
                 node *temp = MinNode(t->right);
@@ -61,6 +61,7 @@ typedef struct node{
                 t->right = DeleteNode(t->right,temp->data);
             }
         }
+       return t;
     }
     void DeleteNode1( node *t ){
         if ( t == NULL ) return;
@@ -92,9 +93,10 @@ typedef struct node{
                 t = insert(t,x);
             }
             cin>>x;
-            DeleteNumber(t,x);
-            if ( t == NULL ) std::cout<<"NULL";
-            else PreOrder(t);
+            t = DeleteNode(t,x);
+           if ( t == NULL ) std::cout<<"NULL";
+           else 
+            PreOrder(t);
             return 0;
         }
         
